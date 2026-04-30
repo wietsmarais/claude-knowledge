@@ -1,12 +1,13 @@
 # Build OS — SCOPING.md
-# Version: 1.0 — 27 April 2026
-# Status: APPROVED FOR COMMIT — Stage 1 complete
+# Version: 1.1 — 30 April 2026
+# Status: WORKING STANDARD — Patch 02 absorbed; ready for founder confirmation and commit
 # Produced in: Developer OS — Build OS scoping session (Session 4, 27 April 2026)
 # Independent review: ChatGPT (two rounds, same session)
-# Location when committed: wietsmarais root repo / docs/architecture/
+# Canonical location when committed: wietsmarais/docs/build-os/BUILD_OS_SCOPING.md
+# Live Claude reference copy: claude-knowledge/build-os/BUILD_OS_SCOPING.md
 # This document governs: every Build OS build session, every assembly run
 # This document is read before: every Build OS session, every module selection step
-# This document is updated when: any architectural decision changes, any new module class added
+# This document is updated when: any architectural decision changes, any new module class is added, Build Plan schema changes, Build Manifest schema changes, or Build OS approval gates change
 
 ---
 
@@ -26,6 +27,24 @@
 | Component library modules identified | ✅ Seven modules, classified |
 | Security and white-label approach confirmed | ✅ Confirmed |
 | RLS on every table from creation | ✅ Confirmed |
+
+
+---
+
+## Patch 02 Absorption Note — 30 April 2026
+
+`PATCH_02_JOINT_DEFINITION_IN_BUILD_PLAN_28042026.md` has been absorbed into this Build OS scoping standard.
+
+This version includes:
+
+- the `Joint definition` row in the human-readable Build Plan schema;
+- the `stage_label` Build Manifest field;
+- the `joint_definition_required` Build Manifest field;
+- the `joint_definition_status` Build Manifest field;
+- the `contracts_status` Build Manifest object; and
+- the Build Plan approval gate requiring Joint definition and `contracts/` status confirmation before ORGAN or COMPOSITE sessions open.
+
+The patch file is now historical reference only once this document is committed and the live `claude-knowledge/build-os/BUILD_OS_SCOPING.md` copy is updated.
 
 ---
 
@@ -611,18 +630,17 @@ Confirm:
 Today's goal: [state in one sentence]
 
 Do not produce a Build Plan until the Module Readiness Matrix gate is confirmed.
-Do not begin assembly until the governed system prompt for this session is confirmed
-For sessions with STAGE: ORGAN or STAGE: COMPOSITE — the Joint definition section must be complete and contracts/ status confirmed before the Build Plan is approved.
-by the founder.
+Do not begin assembly until the governed system prompt for this session is confirmed by the founder.
+For sessions with STAGE: ORGAN or STAGE: COMPOSITE — the Joint definition section must be complete and `contracts/` status confirmed before the Build Plan is approved.
 Do not classify any action below its correct tier.
 ```
 
 ---
 
-*Version: 1.0 — 27 April 2026*
-*Produced: Developer OS — Build OS scoping session*
+*Version: 1.1 — 30 April 2026 — Patch 02 absorbed*
+*Produced: Developer OS — Build OS scoping session; Patch 02 absorbed in Build OS governance cleanup*
 *Independent review: ChatGPT — two rounds — same session*
-*Approved by: Wiets Marais — 27 April 2026*
-*Next update trigger: any Section 4, 5, or 6 decision changes; any new module tier added;
- Phase 2 scoping begins; external-readiness trigger criteria met*
-*Proposed repo location: wietsmarais/docs/architecture/BUILD_OS_SCOPING_27042026.md*
+*Approved by: Wiets Marais — 27 April 2026; Patch 02 absorption pending founder confirmation / commit on 30 April 2026*
+*Next update trigger: any Section 2, 4, 5, or 6 decision changes; any Build Plan or Build Manifest schema change; any new module tier added; Phase 2 scoping begins; external-readiness trigger criteria met*
+*Canonical repo location: wietsmarais/docs/build-os/BUILD_OS_SCOPING.md*
+*Live Claude reference copy: claude-knowledge/build-os/BUILD_OS_SCOPING.md*
