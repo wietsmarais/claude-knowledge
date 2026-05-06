@@ -64,6 +64,27 @@ Features that belong in Xero are never built into Supabase.
 
 ---
 
+### Cursor declared-mode workflow
+
+Cursor is no longer treated as a generic code executor. For governed Nikari work, Cursor operates in declared modes under the Nikari Cursor Operating Roles standard.
+
+Primary LLM-facing reference:
+
+https://raw.githubusercontent.com/wietsmarais/claude-knowledge/main/universal/CURSOR_MODE_REFERENCE_FOR_LLM_PROJECTS.md
+
+Primary Cursor operating-role standard:
+
+https://raw.githubusercontent.com/wietsmarais/wietsmarais/main/docs/process/NIKARI_CURSOR_OPERATING_ROLES.md
+
+Reusable Cursor operating-mode starters:
+
+https://raw.githubusercontent.com/wietsmarais/cursor-prompts/main/prompts/governance/J-cursor-operating-modes.md
+
+Rule:
+Claude/ChatGPT must apply the Cursor operating-mode process when drafting, reviewing, scoping, or improving work that will later go to Cursor.
+
+---
+
 ## Workflow Modes
 
 ### Primary workflow
@@ -161,6 +182,7 @@ Cursor handles those — not the founder directly.
 
 ---
 
-*Last updated: 27 April 2026*  
+*Last updated: 6 May 2026
+*Update reason: Cursor declared-mode workflow and LLM prompt-generation reference added.  
 *Source: PROJECT_STARTER_PACK_v4.1a*  
 *Update when: stack, tools, accounts, or security standards change*

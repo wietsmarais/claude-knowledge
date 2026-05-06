@@ -842,3 +842,159 @@ in NTK_OUTLINE_SET, production triggers in NTK-00.
 End of append block — 28 April 2026 — FINAL VERSION
 Replaces earlier version produced same session
 Odoo entry: CONFIRMED against existing 2026-04-25 entry — not appended
+
+---
+
+UNIVERSAL_DECISIONS.md — Append Block
+Date: 2 May 2026
+Session: Nikari Tech — Project Instructions Naming and Source/Output Discipline
+Append to: wietsmarais/UNIVERSAL_DECISIONS.md
+---
+Decision: Canonical Nikari project names remain stable; descriptive subtitles clarify role
+Date: 2 May 2026
+Status: LOCKED
+Canonical project names remain unchanged for continuity:
+Nikari Developer OS
+Build OS
+Nikari Tech
+Nikari Tech Review
+These names must continue to be used in source references, filenames where they identify a project, Cursor prompts, Claude project instructions, GitHub issue references, handovers, opening prompts, source file paths, project knowledge uploads, and future “read this file first” instructions unless a formal rename migration is later approved.
+Descriptive subtitles may be added in README files, project instructions, handovers, and opening prompts to clarify each project’s role:
+Canonical project name	Descriptive subtitle
+Nikari Developer OS	Development Discipline & Repo Workflow
+Build OS	Build Governance & Assembly Planning
+Nikari Tech	Architecture & Platform Governance
+Nikari Tech Review	Review, Brainstorm & Architecture Check
+Tool-specific instruction files may use tool suffixes, such as `_CLAUDE` and `_CHATGPT`, where needed to distinguish live tool behaviour. This does not rename the canonical project. It only clarifies which tool the instruction file governs.
+Rationale: The four project names already appear across Cursor prompts, project instructions, GitHub issues, handovers, source paths, opening prompts, and project knowledge uploads. Renaming the projects too aggressively would create reference drift. Subtitles preserve continuity while improving boundary clarity.
+Affected files / references:
+Nikari Developer OS project instructions
+Build OS project instructions
+Nikari Tech project instructions
+Nikari Tech Review project instructions
+`wietsmarais/docs/project-instructions/Nikari-Tech-Project-Instructions/`
+Future handovers and opening prompts that refer to these projects
+
+---
+
+---
+## Decision: Cursor Agent mode is the preferred execution path, not the governance authoring authority
+Date: 6 May 2026
+Status: LOCKED
+Source / authority: Founder confirmation — Nikari Platform / NRE public rebuild process review
+
+For governed Nikari repo workflows, Cursor Agent mode is the preferred execution path for routine scoped work, validation, file operations, and commit/push workflows.
+
+Cursor Agent mode may:
+- execute founder-approved scoped implementation tasks;
+- inspect approved files;
+- apply approved code or copy changes;
+- run validation commands;
+- report changed files, validation results, commit hashes, and repo state;
+- create or save files where the content has already been founder-approved;
+- stage, commit, and push after explicit founder approval.
+
+Cursor Agent mode must not be treated as the default author of governance, canonical documents, formal handovers, scope charters, process decisions, or governance-adjacent summaries.
+
+Formal handover and governance content should be drafted or reviewed in ChatGPT or Claude, using Cursor’s factual execution report as source material.
+
+Reason:
+Cursor Agent mode is excellent for execution discipline and repo operations, but formal handovers and governance-adjacent records require higher-level synthesis, sequencing judgment, and process continuity. Keeping handover authorship in ChatGPT or Claude preserves the Nikari tool-role separation.
+
+Boundary:
+Cursor may save, format, validate, stage, commit, and push an approved handover, scope, or governance file, but it should not originate or materially rewrite that content by default unless the founder explicitly authorises a narrow factual draft.
+
+---
+## Decision: Fast handover-confirmation workflow after clean committed handovers
+Date: 6 May 2026
+Status: LOCKED
+Source / authority: Founder confirmation — Nikari Platform / NRE public rebuild process review
+
+When a phase or slice handover has already been committed and pushed, and the repo is clean and aligned, the next scoping session should use a fast handover-confirmation workflow rather than a full forensic re-review.
+
+Minimum confirmation:
+
+    git status -sb
+    git log --oneline -5
+    git ls-files [expected handover file]
+
+Stop only if:
+- the repo is not clean;
+- the branch is not aligned with origin;
+- the expected handover file is not tracked;
+- the latest commits contradict the stated baseline.
+
+If the checks pass, proceed directly to the next real scoping decision.
+
+Reason:
+Full forensic prompts are useful when repo state is uncertain, when risky capability is being opened, or when files may be modified. Once a handover is committed, pushed, tracked, and the repo is clean, repeating the full phase history adds administrative overhead without proportional safety benefit.
+
+Boundary:
+This fast workflow does not apply to:
+- implementation sessions involving source changes;
+- backend, Supabase, forms, CRM, admin, analytics, security, or data-write work;
+- uncertain repo state;
+- missing or uncommitted handovers;
+- cross-repo or legacy/source-mine access;
+- situations where the founder requests a full review.
+
+---
+## Decision: Approved handover and scope content should be authored outside Cursor and saved by Cursor
+Date: 6 May 2026
+Status: LOCKED
+Source / authority: Founder confirmation — Nikari Platform / NRE public rebuild process review
+
+Formal handover, closeout, scope-charter, and governance-adjacent content should be drafted or reviewed in ChatGPT or Claude, then founder-approved before Cursor saves it into the repo.
+
+Cursor Agent may create, overwrite, validate, stage, commit, and push the approved markdown file, but should not originate or materially rewrite formal handover, scope, or governance content by default.
+
+Standard flow:
+1. Cursor completes scoped work and reports factual execution details.
+2. ChatGPT or Claude drafts or reviews the handover, scope, or governance-adjacent content.
+3. Founder confirms the content.
+4. Cursor saves the approved markdown file exactly as provided.
+5. Cursor validates formatting and file content.
+6. Cursor stages, commits, and pushes after explicit founder approval.
+
+Reason:
+This preserves the separation between execution and governance. Cursor executes; ChatGPT or Claude synthesises and reviews; the founder approves; GitHub holds the truth.
+
+Boundary:
+Cursor may produce factual reports, validation summaries, changed-file lists, commit hashes, and repo-state summaries. Those factual reports may become source material for handovers, but they are not themselves formal governance unless reviewed, approved, and committed through the proper process.
+
+---
+## Decision: New untracked markdown files require content verification before commit
+Date: 6 May 2026
+Status: LOCKED
+Source / authority: Founder confirmation — Nikari Platform / NRE public rebuild process review
+
+When a new markdown handover, scope, governance, or documentation file is created and is still untracked, the review process must not rely on `git diff -- [file]` alone, because Git does not show a normal content diff for untracked files unless they are staged or marked with intent-to-add.
+
+For new untracked markdown files, the required lightweight verification is:
+1. Create or save the approved file.
+2. Run `git status -sb`.
+3. Run `git add -N [file]` to mark intent to add without staging content for commit.
+4. Run `git diff -- [file]` so the founder can review the new file content.
+5. Run `git diff --check`.
+6. If markdown fences are present or formatting is important, display the first 60–100 numbered lines with code fences made visible.
+7. Founder confirms.
+8. Stage, commit, and push.
+
+Recommended PowerShell check for visible fences:
+
+    $i = 1
+    Get-Content -Path "[file path]" -TotalCount 100 |
+      ForEach-Object {
+        "{0,3}: {1}" -f $i, ($_.Replace('```', '<FENCE>'))
+        $i++
+      }
+
+Reason:
+During the Phase 7 closeout handover, the file was new and untracked, so `git diff -- [file]` showed no content. This created unnecessary confusion around markdown fence rendering. The issue was not caused by the faster workflow; it came from applying a tracked-file diff process to an untracked new file.
+
+Boundary:
+This rule applies specifically to new untracked markdown handover, scope, governance, and documentation files before first commit.
+
+---
+
+

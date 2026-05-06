@@ -168,3 +168,88 @@ architecture notes) and what stays private (session handovers, prompt
 library, SPEC files, client data) is clear and enforceable. The public
 repo does not become a security risk if the classification rule is
 followed.
+
+---
+## Learning: Prompt length should match risk and uncertainty
+Date: 6 May 2026
+Context: Nikari Platform / NRE public rebuild — Phase 6 to Phase 7 workflow
+
+Long, highly constrained prompts are useful when:
+- repo state is uncertain;
+- a closeout has not been committed;
+- implementation may touch source files;
+- the next step could introduce risky product capability;
+- backend, forms, data writes, CRM, admin, analytics, Supabase, or security are involved;
+- legacy/source-mine boundaries need strong protection.
+
+Shorter confirmation prompts are better when:
+- the handover is already committed and pushed;
+- the repo is clean and aligned;
+- the expected handover file is tracked;
+- the next task is only to make the next scoping decision.
+
+The improved pattern is:
+1. Confirm repo clean/aligned.
+2. Confirm expected handover file is tracked.
+3. Move directly to the next real decision.
+
+This reduces administrative friction while preserving governance discipline.
+
+---
+## Learning: Cursor Agent mode is superior for most governed execution
+Date: 6 May 2026
+Context: Nikari Platform / NRE public rebuild
+
+Using Cursor Agent mode for routine governed repo work has proven better than manual terminal-first execution in most cases.
+
+Benefits observed:
+- fewer command-construction mistakes;
+- clearer stop/report behaviour;
+- better context retention;
+- easier validation reporting;
+- cleaner commit preparation;
+- stronger file-boundary discipline;
+- lower founder cognitive load.
+
+Manual terminal remains useful for direct commands and troubleshooting, but Agent mode should be the default for scoped Nikari repo workflows unless there is a specific reason not to use it.
+
+---
+## Learning: Cursor factual reports should feed handovers, not replace handover authorship
+Date: 6 May 2026
+Context: Nikari Platform / NRE public rebuild
+
+Cursor Agent is effective at reporting factual execution details:
+- repo status;
+- changed files;
+- validation results;
+- forbidden-scope scan results;
+- commit hashes;
+- latest commits;
+- boundary conditions observed.
+
+Those reports are excellent source material for handovers. However, formal handovers, closeouts, scope charters, and governance-adjacent summaries should be drafted or reviewed in ChatGPT or Claude before being committed.
+
+This keeps Cursor in the execution role and keeps synthesis, judgment, and governance-adjacent wording in the review/authoring layer.
+
+---
+## Learning: New untracked documentation files need direct content display or intent-to-add before commit
+Date: 6 May 2026
+Context: Nikari Platform / NRE public rebuild — Phase 7 closeout handover
+
+When a markdown file is new and untracked, `git diff -- [file]` may show no content. This can make a file appear unreviewed even though it exists locally.
+
+For new markdown handover or scope files, use one of these before commit:
+- `git add -N [file]` followed by `git diff -- [file]`; or
+- direct content display with numbered lines, especially where markdown fences are present.
+
+Recommended pattern:
+
+    git status -sb
+    git add -N [file]
+    git diff -- [file]
+    git diff --check
+    Get-Content [file] -TotalCount 60-100 with numbered lines and visible fences, if needed
+
+This is a small verification step, not a return to long forensic review.
+
+---
